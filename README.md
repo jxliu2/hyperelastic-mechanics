@@ -27,12 +27,6 @@ Requires Python 3.13+. Dependencies are managed with [uv](https://github.com/ast
 uv sync
 ```
 
-For the ternary phase diagram (reads `data/water-etoh-decane.xlsx`), also install openpyxl:
-
-```bash
-uv add openpyxl
-```
-
 ## Running
 
 Scripts live in `scripts/`. Parameters are configured via [Hydra](https://hydra.cc) — any key in the config files can be overridden on the command line.

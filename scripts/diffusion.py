@@ -31,13 +31,7 @@ from hyperelastic_mechanics.figures import (
 
 def _load_ternary_data(xlsx_path: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Read ethanol/decane/water weight fractions from the xlsx binodal table."""
-    try:
-        import openpyxl
-    except ImportError as exc:
-        raise ImportError(
-            "openpyxl is required for the ternary diagram. "
-            "Install with: uv add openpyxl"
-        ) from exc
+    import openpyxl
 
     wb = openpyxl.load_workbook(xlsx_path, data_only=True)
     ws = wb.active
@@ -103,16 +97,13 @@ def main(cfg: DictConfig) -> None:
 
     xlsx_path = cfg.diffusion.get("ternary_xlsx")
     if xlsx_path is not None and Path(xlsx_path).exists():
-        try:
-            etoh, decane, water = _load_ternary_data(str(xlsx_path))
-            plot_ternary_diagram(
-                etoh,
-                decane,
-                water,
-                str(out_dir / "ternary_diagram.png"),
-            )
-        except ImportError as e:
-            print(f"  Skipping ternary diagram: {e}")
+        etoh, decane, water = _load_ternary_data(str(xlsx_path))
+        plot_ternary_diagram(
+            etoh,
+            decane,
+            water,
+            str(out_dir / "ternary_diagram.png"),
+        )
     else:
         print("  No ternary xlsx found — skipping ternary_diagram.")
         print("  Set diffusion.ternary_xlsx in config or pass on command line.")
