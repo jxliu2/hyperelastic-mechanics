@@ -2,8 +2,7 @@
 
 Neo-Hookean spherical cavity solver for slightly compressible hyperelastic materials. Code supporting:
 
-> Liu, J. et al. "Mesh-scale phase separation in hydrogels driven by solvent exchange." *Nature Communications* 2023.
-> https://www.nature.com/articles/s41467-023-41528-8
+> Liu, J. X., Haataja, M. P., Košmrlj, A., Datta, S. S., Arnold, C. B. & Priestley, R. D. "Liquid–liquid phase separation within fibrillar networks." *Nature Communications* **14**, 6085 (2023). https://doi.org/10.1038/s41467-023-41528-8
 
 ## Overview
 
