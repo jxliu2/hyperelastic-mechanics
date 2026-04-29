@@ -1,0 +1,31 @@
+# Solvent exchange diffusion and phase diagram parameters
+
+diffusion:
+  D: 1.0e-9          # diffusivity (m^2/s), ethanol in water
+  Cs: 1.0            # concentration at inlet boundary
+  C0: 0.0            # initial concentration in sample
+  window_dist: 1.0e-3  # observation distance from inlet (m)
+  t_max: 4000.0      # max time (s)
+  n_t: 1000          # number of time points
+  highlight_t: 220.22  # time to mark on concentration plot (s)
+  C_threshold: 0.135   # water content above which phase separation begins
+
+  # Path to ternary binodal xlsx (Skrzecz 1999).
+  # Set relative to project root or absolute.
+  ternary_xlsx: data/water-etoh-decane.xlsx
+
+  # Optional: path to .npz with keys w_H2O and gamma_ow for gamma vs time plot.
+  # gamma_data_path: data/gamma_water_calibration.npz
+
+# Cavitation vs mesh-scale phase diagram
+# cavitated[i, j] = 1 if cavitation observed at (c_gel[i], c_surf[j])
+phase_diagram:
+  c_gel: [3, 8, 13, 20]
+  c_surf: [1.0e-6, 5.0e-5, 2.0e-4, 2.0e-3, 2.0e-2]
+  cavitated:
+    - [1, 1, 1, 1, 1]
+    - [1, 1, 1, 0, 0]
+    - [1, 1, 0, 0, 0]
+    - [1, 0, 0, 0, 0]
+
+output_dir: outputs/diffusion

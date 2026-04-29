@@ -1,0 +1,27 @@
+# Spherical cavity solver parameters
+
+# compressibility cases to compare: list of {beta, lambda, label}
+cases:
+  - beta: 1.5
+    lambda_: 3.0
+    label: "beta=1.5, lambda=3"
+  - beta: 1.3
+    lambda_: 5.0
+    label: "beta=1.3, lambda=5"
+
+# integration domain
+x_end: 6.0      # max R/R0 to integrate to
+n_eval: 50000   # number of output points
+
+# lambda sweep for blurred profile plots
+lambda_sweep:
+  enabled: true
+  beta: 2.4
+  lambda_min: 1.01
+  lambda_max: 2.67
+  n_lambda: 20
+
+# optical blur parameters
+blur_wid: 0.3846  # = 0.5/1.3, blur half-width in deformed radius units
+
+output_dir: outputs/solve

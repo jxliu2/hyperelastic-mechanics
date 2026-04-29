@@ -1,0 +1,26 @@
+# Elastic energy and pressure calculation parameters
+
+elastic:
+  E: 1.0          # elastic modulus (normalised)
+  beta: 50.0      # compressibility: beta=50 -> nu~0.49 (nearly incompressible)
+  gamma: 2.0      # interfacial energy (normalised to E)
+  epsilon_c: 3.0  # strain-stiffening parameter (larger = later onset)
+
+  # hoop-stretch range for pressure / total-energy plots
+  lam_min: 0.5
+  lam_max: 25.0
+  n_lam: 500
+
+  # hoop-stretch range for elastic energy density (Ronceray / MR) plots
+  lam_energy_max: 10.0
+
+  # list of epsilon_c values for pressure-curve sweep
+  epsilon_c_list: [3, 40]
+
+  # Mooney-Rivlin n values (n=1 -> NH, n=0 -> C01-only)
+  n_list: [0.05, 0.5, 1.0]
+
+  # y-axis ceiling for pressure/energy plots
+  p_ylim: 10.0
+
+output_dir: outputs/elastic
