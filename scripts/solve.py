@@ -15,8 +15,9 @@ from pathlib import Path
 import hydra
 import numpy as np
 from omegaconf import DictConfig
+from scipy.signal.windows import gaussian
 
-from hyperelastic_mechanics.fitting import nh_blur_peak, nh_fit_fn
+from hyperelastic_mechanics.fitting import nh_fit_fn
 from hyperelastic_mechanics.figures import (
     plot_blurred_profiles,
     plot_density_profiles,
@@ -36,8 +37,10 @@ def main(cfg: DictConfig) -> None:
     blur_wid = cfg.blur_wid
 
     density_profiles = []
-    displacement_profiles = []
+    disp_profiles = []
     labels = []
+
+    xx = np.linspace(1.0 + (x_end - 1.0) / n_eval, x_end, n_eval)
 
     for case in cfg.cases:
         beta = case.beta
@@ -48,21 +51,10 @@ def main(cfg: DictConfig) -> None:
         nu = (1.0 - 1.0 / beta) / 2.0
 
         density_profiles.append((rdim, den))
-        displacement_profiles.append((rdim / (rdim / rdim * 1.0), rdim))
+        disp_profiles.append((xx, rdim))
         labels.append(label)
 
         print(f"  {label}: nu={nu:.3f}, peak density={den.max():.4f}")
-
-    # rebuild displacement profiles correctly: (xx, rdim) where xx = R/R0
-    # We need xx from the solver — re-run to get it, or compute from rdim
-    # xx = rdim / (r1+1) but we don't have r1 directly; simplest: use linspace
-    disp_profiles = []
-    for case in cfg.cases:
-        beta = case.beta
-        lambda_ = case.lambda_
-        rdim, den = nh_solver(beta, lambda_, x_end=x_end, n_eval=n_eval)
-        xx = np.linspace(1.0 + (x_end - 1.0) / n_eval, x_end, n_eval)
-        disp_profiles.append((xx, rdim))
 
     plot_density_profiles(
         density_profiles,
@@ -103,8 +95,6 @@ def main(cfg: DictConfig) -> None:
 
             drdim = (rdim[-1] - rdim[0]) / len(rdim)
             n_blur = blur_wid / drdim
-
-            from scipy.signal.windows import gaussian
 
             n_win = max(int(round(n_blur)), 1)
             std = (n_win - 1) / 5.0

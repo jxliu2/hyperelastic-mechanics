@@ -105,5 +105,6 @@ def gamma_vs_time(
     mask = C_t > C_threshold
     t_out = t_arr[mask]
     C_out = C_t[mask]
-    gamma_out = np.interp(C_out, w_H2O[::-1], gamma_ow[::-1])
+    sort_idx = np.argsort(w_H2O)
+    gamma_out = np.interp(C_out, w_H2O[sort_idx], gamma_ow[sort_idx])
     return t_out, gamma_out

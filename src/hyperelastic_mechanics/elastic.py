@@ -34,7 +34,7 @@ def nh_pressure(E: float, lam_a: float | np.ndarray) -> float | np.ndarray:
     lam_a : hoop stretch >= 1.
     """
     lam_a = np.asarray(lam_a, dtype=float)
-    return E * (2.5 - 2.0 / lam_a - 0.5 / lam_a**4)
+    return np.where(lam_a > 1.0, E * (2.5 - 2.0 / lam_a - 0.5 / lam_a**4), 0.0)
 
 
 def ss_pressure(

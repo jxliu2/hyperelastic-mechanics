@@ -556,6 +556,8 @@ def plot_ternary_diagram(
     phi_b_arr = np.asarray(decane, dtype=float)
     phi_c_arr = np.asarray(water, dtype=float)
     xb, yb = _to_xy(phi_a_arr, phi_b_arr, phi_c_arr)
+    sort_idx = np.argsort(xb)
+    xb, yb = xb[sort_idx], yb[sort_idx]
     xq = np.linspace(xb.min(), xb.max(), 2000)
     yq = np.interp(xq, xb, yb)
     ax.plot(xq, yq, color="#D55E00", linewidth=3, label="Binodal")
