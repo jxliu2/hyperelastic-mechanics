@@ -6,7 +6,7 @@ Neo-Hookean spherical cavity solver for slightly compressible hyperelastic mater
 
 ## Overview
 
-Models radial deformation around a spherical cavity in a slightly compressible neo-Hookean material. The compressibility parameter beta = 1/(1-2*nu) controls how much material accumulates around an expanding cavity, producing density rings observable by optical microscopy.
+Models radial deformation around a spherical cavity in a slightly compressible neo-Hookean material. The compressibility parameter beta = 1/(1-2*nu) controls how much material accumulates around an expanding cavity, producing density rings observable by optical microscopy. This codebase is a port of the original modeling code. 
 
 Five pipelines are available:
 
